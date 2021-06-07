@@ -1,4 +1,6 @@
-﻿using Entities.Concrete;
+﻿using Core.DataAccess;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,13 +10,11 @@ namespace DataAccess.Abstract
     //ICarDal Carla ilgili veri tabanında yapılacak operasyonları içeren  interfaceler 
     //istenen operasyonlar GetById, GetAll, Add, Update, Delete
  
-    public interface ICarDal
+    public interface ICarDal:IEntityRepository<Car> //çalısma tipi car olan bir IRepository'sin 
     {
-        List<Car> GetAll();     //Baska bir katmanı kullanmak ıstıyorsak(Entities) referans veririz 
-        List<Car> GetByCarId( int BrandId);
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(Car car);
+
+        //ürüne ait ozel sartları yazıcaz join atma urun detayı vsvs 
+        List<CarDetailDto> GetCarDetails();  //ürün detaylarını getir
 
 
         
