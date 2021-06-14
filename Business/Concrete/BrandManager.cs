@@ -18,7 +18,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public IResult add(Brand brand)
+        public IResult Add(Brand brand)
         {
             //business code ?
             if (brand.BrandName.Length<2)
@@ -34,7 +34,7 @@ namespace Business.Concrete
         }
 
         //public void delete(Brand brand)  eskisi 
-        public IResult delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
 
@@ -43,24 +43,21 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            if (DateTime.Now.Hour==1)
-            {
-                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour==1)
+            //{
+            //    return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+            //}
            return new SuccessDataResult<List<Brand>>( _brandDal.GetAll(),Messages.BrandsListed);
         }
 
-        public IDataResult<Brand> GetBrandByBrandId(int brandid)
-        {
-            return new SuccessDataResult<Brand>(_brandDal.Get(x => x.BrandId == brandid),Messages.FilterId);
-        }
+        
 
         public IDataResult<Brand> GetById(int brandId)
         {
            return new SuccessDataResult<Brand>(_brandDal.Get(x => x.BrandId == brandId),Messages.FilterId);
         }
 
-        public IResult update(Brand brand)
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
 

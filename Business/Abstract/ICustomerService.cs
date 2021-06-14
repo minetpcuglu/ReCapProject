@@ -11,7 +11,7 @@ namespace Business.Abstract
         IDataResult<List<Customer>> GetAll();
 
         IDataResult<Customer> GetById(int customerId); 
-        IDataResult<Customer> GetCustomerByCustomerId(int customerid);
+      
 
         IResult add(Customer customer);
         //void delete(Brand brand);

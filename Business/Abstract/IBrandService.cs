@@ -12,12 +12,12 @@ namespace Business.Abstract
         IDataResult<List<Brand>> GetAll();  
 
         IDataResult<Brand> GetById(int brandId);  //marka detayı
-        IDataResult<Brand> GetBrandByBrandId(int brandid);
+     
 
-        IResult add(Brand brand);
+        IResult Add(Brand brand);
         //void delete(Brand brand);
-        IResult delete(Brand brand);
-        IResult update(Brand brand);
+        IResult Delete(Brand brand);
+        IResult Update(Brand brand);
 
     }
 }

@@ -45,10 +45,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(x => x.CustomerId == customerId),Messages.FilterId);
         }
 
-        public IDataResult<Customer> GetCustomerByCustomerId(int customerid)
-        {
-            return new SuccessDataResult<Customer>(_customerDal.Get(x => x.CustomerId == customerid), Messages.FilterId);
-        }
+      
 
         public IResult update(Customer customer)
         {

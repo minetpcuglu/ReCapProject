@@ -48,14 +48,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorsListed);
         }
 
-        public IDataResult<Color> GetBrandByBrandId(int colorid)
-        {
-            return new SuccessDataResult<Color> (_colorDal.Get(c => c.ColorId == colorid),Messages.FilterId);
-        }
+        //public IDataResult<Color> GetBrandByBrandId(int colorid)
+        //{
+        //    return new SuccessDataResult<Color> (_colorDal.Get(c => c.ColorId == colorid),Messages.FilterId);
+        //}
 
         public IDataResult<Color> GetById(int colorId)
         {
-           return new SuccessDataResult<Color> (_colorDal.Get(x => x.ColorId == colorId));
+           return new SuccessDataResult<Color> (_colorDal.Get(x => x.ColorId == colorId),Messages.FilterId);
         }
 
         public IResult update(Color color)

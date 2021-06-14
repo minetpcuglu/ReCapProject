@@ -27,10 +27,10 @@ namespace Business.Concrete
         public IDataResult<List<User>> GetAll()
         {
             //İş kodları yazılır
-            if (DateTime.Now.Hour == 1)
-            {
-                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 4 )
+            //{
+            //    return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
         }
 
