@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -24,6 +26,8 @@ namespace Business.Concrete
         //araba ismi  minumum 2 karakter olmalı
         //araba günlük fiyatı 0 dan büyük olmalı
 
+
+        [ValidationAspect(typeof (CarValidator))]
         public IResult add(Car car)
         {
             if (car.Description.Length<2 && car.DailyPrice<=0)
