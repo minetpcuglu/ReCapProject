@@ -10,12 +10,14 @@ namespace Business.Constants  //sabitler
     {
         public static string BrandAdded = "Marka eklendi";
         public static string CarAdded = "Araba eklendi";
+        public static string CarImagesAdded = "Araba Resimleri eklendi";
         public static string ColorAdded = "Renk eklendi";
         public static string CustomerAdded = "Müşteri eklendi";
         public static string UserAdded = "Kullanıcı eklendi";
         public static string RentalAdded = "Yeni Kiralama detayı eklendi";
         public static string BrandDeleted = "Marka silindi";
         public static string CarDeleted = "Araba silindi";
+        public static string CarImagesDeleted = "Araba Resimleri silindi";
         public static string ColorDeleted = "Renk silindi";
         public static string CustomerDeleted = "Müşteri silindi";
         public static string UserDeleted = "Kullanıcı silindi";
@@ -23,11 +25,13 @@ namespace Business.Constants  //sabitler
         public static string BrandUpdated = "Marka güncellendi";
         public static string ColorUpdated = "Renk güncellendi";
         public static string CarUpdated = "Araba güncellendi";
+        public static string CarIamgesUpdated = "Araba resimleri güncellendi";
         public static string CustomerUpdated = "Müşteri güncellendi";
         public static string UserUpdated = "Kullanıcı güncellendi";
         public static string RentalUpdated = "Araç Kiralama Detayı güncellendi";
         public static string BrandsListed = "Markalar Listelendi";
         public static string CarsListed = "Arabalar Listelendi";
+        public static string CarsImagesListed = "Arabalar resimleri Listelendi";
         public static string ColorsListed = "Renkler Listelendi";
         public static string CustomersListed = "Müşteriler Listelendi";
         public static string UsersListed = "Kullanıcılar Listelendi";
@@ -40,7 +44,7 @@ namespace Business.Constants  //sabitler
         public static string UserNameInValid = "Kullanıcı ismi geçersiz ve şartlar sağlanamamaktadır";
         public static string RentalNameInValid = "Araç detayları geçersiz";
         public static string FilterId = "Filtreleme Başarılı";
-
+        public static string CarMaxImageLimit ="Bir arabanın maksimum 5 fotografı olmalıdır ";
     }
 
 }
