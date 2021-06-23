@@ -22,38 +22,38 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Add(CarImages carImages)
+        public IResult Add(CarImage carImages)
         {
             IResult result = BusinessRules.Run(CheckCarMaxImageLimit(carImages.CarId));
-            carImages.Date = DateTime.Now.Date;
+            carImages.Date = DateTime.Now;
             _carImagesDal.Add(carImages);
             return new SuccessResult(Messages.CarImagesAdded);
         }
 
-        public IResult Delete(CarImages carImages)
+        public IResult Delete(CarImage carImages)
         {
             _carImagesDal.Delete(carImages);
             return new SuccessResult(Messages.CarImagesDeleted);
         }
 
-        public IDataResult<List<CarImages>> GetAllCarImages()
-        {
-            _carImagesDal.GetAll();
-            return new SuccessDataResult<List<CarImages>>(Messages.CarsImagesListed);
-        }
-
-        public IDataResult<CarImages> GetCarImage(int id)
+        public IDataResult<List<CarImage>> GetAllCarImages()
         {
             
-            return new SuccessDataResult<CarImages>(_carImagesDal.Get(x => x.CarImagesId == id), Messages.FilterId);
+            return new SuccessDataResult<List<CarImage>>(_carImagesDal.GetAll(),Messages.CarsImagesListed);
         }
 
-        public IDataResult<List<CarImages>> GetCarImageByCarId(int carId)
+        public IDataResult<CarImage> GetCarImage(int id)
         {
-            return new SuccessDataResult<List<CarImages>>(_carImagesDal.GetAll(x => x.CarId == carId), Messages.FilterId);
+            
+            return new SuccessDataResult<CarImage>(_carImagesDal.Get(x => x.CarImagesId == id), Messages.FilterId);
         }
 
-        public IResult Update(CarImages carImages)
+        public IDataResult<List<CarImage>> GetCarImageByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImagesDal.GetAll(x => x.CarId == carId), Messages.FilterId);
+        }
+
+        public IResult Update(CarImage carImages)
         {
             _carImagesDal.Update(carImages);
             return new SuccessResult(Messages.CarIamgesUpdated);

@@ -14,6 +14,12 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+
+        public UserManager(IUserDal userDal)
+        {
+            _userDal = userDal;
+        }
+
         public IResult add(User user)
         {
             _userDal.Add(user);
@@ -26,7 +32,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserDeleted);
         }
 
-        [ValidationAspect(typeof(UserValidator))]
+        //[ValidationAspect(typeof(UserValidator))]
         public IDataResult<List<User>> GetAll()
         {
             //İş kodları yazılır

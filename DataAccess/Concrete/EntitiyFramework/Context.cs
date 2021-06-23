@@ -15,6 +15,10 @@ namespace DataAccess.Concrete.EntitiyFramework
 
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-RKDCHFH;Database=Db_ReCapProject;Trusted_Connection=true");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CarImage>().HasKey(x=>x.CarImagesId);
+        }
 
         //hangi nesnem hangi nesneye karsı gelcek 
         public DbSet<Car> TblCar { get; set; }
@@ -23,7 +27,7 @@ namespace DataAccess.Concrete.EntitiyFramework
         public DbSet<User> TblUser { get; set; }
         public DbSet<Rental> TblRental { get; set; }
         public DbSet<Customer> TblCustomer { get; set; }
-        public DbSet<CarImages> TblcarImages { get; set; }
+        public DbSet<CarImage> TblcarImages { get; set; }
 
     }
 }
