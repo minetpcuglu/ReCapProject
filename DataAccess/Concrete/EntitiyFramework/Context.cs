@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace DataAccess.Concrete.EntitiyFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)  
         {
 
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-RKDCHFH;Database=Db_ReCapProject;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-RKDCHFH;Database=Db.ReCapProject;Trusted_Connection=true");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,8 @@ namespace DataAccess.Concrete.EntitiyFramework
         public DbSet<Brand> TblBrand { get; set; }
         public DbSet<Color> TblColor { get; set; }
         public DbSet<User> TblUser { get; set; }
+        public DbSet<OperationClaims> TblOperationClaims { get; set; }
+        public DbSet<UserOperationClaims> TblUserOperationClaims { get; set; }
         public DbSet<Rental> TblRental { get; set; }
         public DbSet<Customer> TblCustomer { get; set; }
         public DbSet<CarImage> TblcarImages { get; set; }

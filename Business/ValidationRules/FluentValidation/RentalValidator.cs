@@ -10,8 +10,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public RentalValidator()
         {
-            RuleFor(x => x.RentDate).NotEmpty().WithMessage("Boş geçilemez");
-            RuleFor(x => x.ReturnDate).NotEmpty().WithMessage("Boş Geçilemez");
+            //RuleFor(x => x.RentDate).NotEmpty().WithMessage("Boş geçilemez");
+            //RuleFor(x => x.ReturnDate).NotEmpty().WithMessage("Boş Geçilemez");
           
         }
     }

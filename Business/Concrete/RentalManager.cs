@@ -21,7 +21,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        //[ValidationAspect(typeof(RentalValidator))]
         public IResult add(Rental rental)
         {
             _rentalDal.Add(rental);
