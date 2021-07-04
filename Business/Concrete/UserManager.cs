@@ -48,6 +48,11 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(x =>x.UserId== userId), Messages.FilterId);
         }
 
+        public IDataResult<User> GetByMail(string userMail)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(x => x.Email == userMail),Messages.ListMail);
+        }
+
         public IResult update(User user)
         {
             _userDal.Update(user);

@@ -45,6 +45,7 @@ namespace Business.Constants  //sabitler
         public static string RentalNameInValid = "Araç detayları geçersiz";
         public static string FilterId = "Filtreleme Başarılı";
         public static string CarMaxImageLimit ="Bir arabanın maksimum 5 fotografı olmalıdır ";
+        public static string ListMail="Mail göre filtreleme başarılı";
     }
 
 }
