@@ -45,7 +45,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int userId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(x =>x.UserId== userId), Messages.FilterId);
+            return new SuccessDataResult<User>(_userDal.Get(x =>x.Id== userId), Messages.FilterId);
         }
 
         public IDataResult<User> GetByMail(string userMail)

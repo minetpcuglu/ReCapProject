@@ -29,8 +29,20 @@ namespace Core.Utilities.Security.JWT
 
         public AccessToken CreateToken(User user, List<OperationClaims> operationClaims)
         {
+            //var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
+            //var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
+            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
+            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            var token = jwtSecurityTokenHandler.WriteToken(jwt);
+
+            return new AccessToken
+            {
+                Token = token,
+                Expiraiton = _accessTokenExpiration
+            };
 
         }
 
@@ -51,7 +63,7 @@ namespace Core.Utilities.Security.JWT
         private IEnumerable<Claim> SetClaims(User user, List<OperationClaims> operationClaims) //claimleri set etmek için operasyon 
         {
             var claims = new List<Claim>();
-            claims.AddNameIdentifier(user.UserId.ToString());
+            claims.AddNameIdentifier(user.Id.ToString());
             claims.AddEmail(user.Email);
             claims.AddName($"{user.FirstName} {user.LastName}");
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());

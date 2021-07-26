@@ -19,9 +19,9 @@ namespace DataAccess.Concrete.EntitiyFramework
             //join atalım
             using (Context context = new Context())
             {
-                var result = from c in context.TblCar  //arabayla
-                             join color in context.TblColor on c.ColorId equals color.ColorId //renkleri ve 
-                             join b in context.TblBrand on c.BrandId equals b.BrandId          // markaları join et 
+                var result = from c in context.Cars  //arabayla
+                             join color in context.Colors on c.ColorId equals color.ColorId //renkleri ve 
+                             join b in context.Brands on c.BrandId equals b.BrandId          // markaları join et 
                              select new CarDetailDto //hangi kolonları istiyoruz 
                              {
                                  CarId = c.CarId,
