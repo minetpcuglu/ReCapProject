@@ -7,10 +7,12 @@ using System.Text;
 
 namespace Core.Extensions
 {
-   public static class ClaimExtensions
+    //var olan nesneye(class'a) yeni metotlar eklenmesine Extensions denir genişletebilirzde diyebiliriz.
+    //metotdunda class'nda statıc olması gerekli 
+   public static class ClaimExtensions 
     {
 
-        public static void AddEmail(this ICollection<Claim> claims, string email)
+        public static void AddEmail(this ICollection<Claim> claims, string email)  //AddEmail metodu *"this"* gördüğümüz için  ICollection içine eklenecek demek Extensions demek
         {
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, email));
         }
@@ -27,7 +29,7 @@ namespace Core.Extensions
 
         public static void AddRoles(this ICollection<Claim> claims, string[] roles)
         {
-            roles.ToList().ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role))); //her bir rolu sisteme claimlere ekle 
+            roles.ToList().ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));  //her bir rolu liste cevir ve her bir rolu sistemde claimlere ekle 
         }
     }
 }

@@ -8,6 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface IUserDal:IEntityRepository<User>
     {
-        //List<OperationClaims> GetClaims(User user); //kullanıcının sahip oldugu operasyonları çekmek istiyoruz 
+        List<OperationClaims> GetClaims(User user);  //kullanıcının sahip oldugu operasyonları çekmek istiyoruz JWT için
     }
 }

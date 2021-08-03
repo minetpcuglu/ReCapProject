@@ -18,5 +18,9 @@ namespace Business.Abstract
         //void delete(Brand brand);
         IResult delete(User user);
         IResult update(User user);
+
+        List<OperationClaims> GetClaims(User user); //jwt için claimleri çek ...
+        void Add(User user); // jwt 
+        User GetByEMail(string email); //emaile göre kullanıcı getir kullanıcı ekle
     }
 }

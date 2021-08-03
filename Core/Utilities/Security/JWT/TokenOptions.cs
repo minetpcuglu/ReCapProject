@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Utilities.Security.JWT
 {
-   public class TokenOptions
+   public class TokenOptions  //helper classtır
     {
         public string Audience { get; set; }  //token kullanıcı kitlesi
         public string Issuer { get; set; }   //onaylayan

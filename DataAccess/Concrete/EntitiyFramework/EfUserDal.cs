@@ -10,7 +10,7 @@ namespace DataAccess.Concrete.EntitiyFramework
 {
     public class EfUserDal : EfEntityRepositoryBase<User, Context>, IUserDal
     {
-        //kullanıcının rollerini cekmek için claim bilgilerini çekiyoruz Join ediyoruz
+        //kullanıcının rollerini cekmek için claim bilgilerini çekiyoruz Join ediyoruz //JWT için
         public List<OperationClaims> GetClaims(User user)
         {
             using (var context = new Context())

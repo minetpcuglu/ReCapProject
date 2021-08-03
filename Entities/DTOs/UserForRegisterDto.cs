@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entities.DTOs
 {
-    public class UserForRegisterDto:IDto   //kayıt olma işlemi için
+    public class UserForRegisterDto:IDto   //kayıt olma işlemi için  /jwt
     {
         public string Email { get; set; }
         public string Password { get; set; }

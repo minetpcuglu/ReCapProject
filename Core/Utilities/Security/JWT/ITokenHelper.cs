@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Core.Utilities.Security.JWT
 {
-    public interface ITokenHelper
+    public interface ITokenHelper //token ureticek mekanızma
     {
-        //kullanıcı bilgisi ve rol bilgilerini verildi
+        //kullanıcı bilgisi ve rol bilgilerini  yeklileri verildi
         AccessToken CreateToken(User user ,List<OperationClaims> operationClaims);   
     }
 }

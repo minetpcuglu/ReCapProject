@@ -26,6 +26,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserAdded);
         }
 
+        public void Add(User user)  //jwt
+        {
+            _userDal.Add(user);
+        }
+
         public IResult delete(User user)
         {
             _userDal.Delete(user);
@@ -43,6 +48,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
         }
 
+        public User GetByEMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
         public IDataResult<User> GetById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(x =>x.Id== userId), Messages.FilterId);
@@ -51,6 +61,11 @@ namespace Business.Concrete
         public IDataResult<User> GetByMail(string userMail)
         {
             return new SuccessDataResult<User>(_userDal.Get(x => x.Email == userMail),Messages.ListMail);
+        }
+
+        public List<OperationClaims> GetClaims(User user)
+        {
+           return _userDal.GetClaims(user);
         }
 
         public IResult update(User user)
