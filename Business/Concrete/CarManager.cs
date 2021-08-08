@@ -1,6 +1,10 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -22,12 +26,12 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        //filtre verelim :
-        //araba ismi  minumum 2 karakter olmalı
-        //araba günlük fiyatı 0 dan büyük olmalı
 
+       
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof (CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")] //interfacedeki butun getleri sil
         public IResult add(Car car)
         {
             if (car.Description.Length<2 && car.DailyPrice<=0)
@@ -40,15 +44,31 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            add(car);
+            if (car.DailyPrice < 10)
+            {
+                throw new Exception("");
+            }
+
+            add(car);
+
+
+            return null;
+        }
+
         public IResult delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [CacheAspect] //key,value
         public IDataResult<List<Car>> GetAll()  
         {
-            //İş kodları yazılır
+           
             if (DateTime.Now.Hour==1)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
@@ -61,6 +81,8 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.BrandId == Id), Messages.FilterId);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(5)]  //metodun calısması 5 sn gecerse uyar
         public IDataResult<Car> GetById(int id)
         {
            return new SuccessDataResult<Car>(_carDal.Get(x => x.CarId == id),Messages.FilterId);
@@ -83,6 +105,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarsListed);
         }
 
+        [CacheRemoveAspect("ICarService.Get")] //interfacedeki butun getleri sil
         public IResult update(Car car)
         {
             _carDal.Update(car);

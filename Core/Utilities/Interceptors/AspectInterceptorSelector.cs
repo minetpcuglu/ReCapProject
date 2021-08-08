@@ -19,6 +19,7 @@ namespace Core.Utilities.Interceptors
             classAttributes.AddRange(methodAttributes);
 
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); //otomatik  olarak sistemdeki tüm metotları ,verileri loga dönüştür
+            //classAttributes.Add(new PerformanceAspect(typeof())); //performans yönetim
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }

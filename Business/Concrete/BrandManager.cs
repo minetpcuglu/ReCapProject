@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -22,7 +25,10 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        [ValidationAspect(typeof(BrandValidator))] //kuralları böyle yapalım .... ?
+   
+        [SecuredOperation("brand.add")] // authorzition yetki kontrolu
+        [ValidationAspect(typeof(ColorValidator))]
+        [CacheRemoveAspect("IBrandService.Get")] //interfacedeki butun getleri sil
         public IResult Add(Brand brand)
         {
             //business code ?
@@ -50,8 +56,9 @@ namespace Business.Concrete
            return new SuccessDataResult<List<Brand>>( _brandDal.GetAll(),Messages.BrandsListed);
         }
 
-        
 
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Brand> GetById(int brandId)
         {
            return new SuccessDataResult<Brand>(_brandDal.Get(x => x.BrandId == brandId),Messages.FilterId);

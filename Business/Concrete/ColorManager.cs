@@ -2,6 +2,8 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -24,6 +26,7 @@ namespace Business.Concrete
 
         [SecuredOperation("color.add")] // authorzition yetki kontrolu
         [ValidationAspect(typeof (ColorValidator))]
+        [CacheRemoveAspect("IColorService.Get")] //interfacedeki butun getleri sil
         public IResult add(Color color)
         {
             if (color.ColorName.Length<2)
@@ -58,11 +61,14 @@ namespace Business.Concrete
         //    return new SuccessDataResult<Color> (_colorDal.Get(c => c.ColorId == colorid),Messages.FilterId);
         //}
 
+        [CacheAspect]
+        [PerformanceAspect(5)]  //metodun calısması 5 sn gecerse uyar
         public IDataResult<Color> GetById(int colorId)
         {
            return new SuccessDataResult<Color> (_colorDal.Get(x => x.ColorId == colorId),Messages.FilterId);
         }
 
+        [CacheRemoveAspect("IColorService.Get")] //interfacedeki butun getleri sil
         public IResult update(Color color)
         {
             _colorDal.Update(color);

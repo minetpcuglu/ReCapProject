@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.Security.Encryption
 {
-   public class SecurityKeyHelper
+   public static class SecurityKeyHelper
     {
         //şifreleme olan sistemlerde her seyi byte array seklinde oluşturmamız lazım ki jwt sistemi anlasın 
         //appsettingte oluşturduklarımı stringleri jwt uygun hale  byte haline getiriyoruz

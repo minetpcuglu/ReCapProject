@@ -50,9 +50,7 @@ namespace Core.Utilities.Helpers
                 File.Delete(fstream.Name);
                 return new SuccessResult(newPath);
             }
-            /*
-             sanırım  update de kalmıstık evet 
-             */
+        
             catch (Exception e)
             {
                 return new ErrorResult(e.Message);

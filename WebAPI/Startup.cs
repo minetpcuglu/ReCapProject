@@ -1,5 +1,7 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -40,7 +42,7 @@ namespace WebAPI
                                        //services.AddSingleton<IBrandDal, EfBrandDal>(); //bagýmlýlýklar giderildi
 
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //her yapýlan istekle ilgilimmolusan context
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //her yapýlan istekle ilgili olusan context  Core module yazdýk 
 
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>(); // bu sistemde authtikasyon olarak jwt kullanýlcak 
@@ -61,10 +63,10 @@ namespace WebAPI
                     };
                 });
 
-            ServiceTool.Create(services); //bu diðer auth yetkisiz býrakmak için devreye sokmak için 
+            services.AddDependencyResolvers(new ICoreModule[] { new CoreModule()}); //core katmanndaki core module bagýmlýklarý wep apiye tasýmak ýcýn 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

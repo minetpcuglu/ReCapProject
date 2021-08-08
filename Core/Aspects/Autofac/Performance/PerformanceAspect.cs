@@ -1,0 +1,39 @@
+﻿using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
+using Core.Utilities.IoC;
+using System;
+using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
+using System.Text;
+
+namespace Core.Aspects.Autofac.Performance
+{
+    //sistem yavaslarsa sorgulamada performans zaafiyeti varsa sistem uyarması için 
+    public class PerformanceAspect : MethodInterception
+    {
+        private int _interval;
+        private Stopwatch _stopwatch;
+
+        public PerformanceAspect(int interval)
+        {
+            _interval = interval;
+            _stopwatch = ServiceTool.ServiceProvider.GetService<Stopwatch>();
+        }
+
+
+        protected override void OnBefore(IInvocation invocation)  //method basladıgında kronometre baslar
+        {
+            _stopwatch.Start();
+        }
+
+        protected override void OnAfter(IInvocation invocation)
+        {
+            if (_stopwatch.Elapsed.TotalSeconds > _interval)  //o ana kadar gecen sure 
+            {
+                Debug.WriteLine($"Performance : {invocation.Method.DeclaringType.FullName}.{invocation.Method.Name}-->{_stopwatch.Elapsed.TotalSeconds}");
+            }
+            _stopwatch.Reset();  //metod bittiginde  zamanı durdurur 
+        }
+    }
+}
